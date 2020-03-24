@@ -24,6 +24,7 @@
 **/doc/api/
 .dart_tool/
 .flutter-plugins
+.vscode/
 .flutter-plugins-dependencies
 .packages
 .pub-cache/
