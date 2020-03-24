@@ -1,4 +1,3 @@
-import 'package:appbank/screens/contacts_list.dart';
 import 'package:appbank/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +12,7 @@ class AppBank extends StatelessWidget {
           buttonTheme: ButtonThemeData(
               buttonColor: Colors.cyan[700],
               textTheme: ButtonTextTheme.primary)),
-      home: ContactList(),
+      home: Dashboard(),
     );
   }
 }
