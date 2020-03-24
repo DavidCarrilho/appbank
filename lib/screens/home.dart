@@ -1,3 +1,4 @@
+import 'package:appbank/screens/contact_fomr.dart';
 import 'package:appbank/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class AppBank extends StatelessWidget {
           buttonTheme: ButtonThemeData(
               buttonColor: Colors.cyan[700],
               textTheme: ButtonTextTheme.primary)),
-      home: Dashboard(),
+      home: ContactForm(),
     );
   }
 }
