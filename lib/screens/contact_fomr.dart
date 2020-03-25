@@ -9,7 +9,8 @@ class ContactForm extends StatefulWidget {
 class _ContactFormState extends State<ContactForm> {
   final TextEditingController _nameController = TextEditingController();
 
-  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _accountNumberController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class _ContactFormState extends State<ContactForm> {
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: TextField(
-                  controller: _numberController,
+                  controller: _accountNumberController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     labelText: "Número da Conta",
@@ -48,8 +49,9 @@ class _ContactFormState extends State<ContactForm> {
                 child: RaisedButton(
                   onPressed: () {
                     final String name = _nameController.text;
-                    final int number = int.tryParse(_numberController.text);
-                    final Contact newContact = Contact(name, number);
+                    final int accountNumber =
+                        int.tryParse(_accountNumberController.text);
+                    final Contact newContact = Contact(0, name, accountNumber);
                     Navigator.pop(context, newContact);
                   },
                   child: Text("Criar"),
