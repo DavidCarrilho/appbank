@@ -1,13 +1,14 @@
 import 'package:appbank/screens/contacts_list.dart';
 import 'package:flutter/material.dart';
 
-const _textHome ="Dashboard";
+const _textHome = "Dashboard";
 
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Icon(Icons.dashboard),
         title: Text(_textHome),
         centerTitle: true,
       ),
