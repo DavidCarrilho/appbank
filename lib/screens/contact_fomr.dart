@@ -1,4 +1,4 @@
-import 'package:appbank/database/app_database.dart';
+import 'package:appbank/database/dao/contact_dao.dart';
 import 'package:appbank/models/contact.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +12,7 @@ class _ContactFormState extends State<ContactForm> {
 
   final TextEditingController _accountNumberController =
       TextEditingController();
+  final ContactDAO _dao = ContactDAO();
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +54,7 @@ class _ContactFormState extends State<ContactForm> {
                     final int accountNumber =
                         int.tryParse(_accountNumberController.text);
                     final Contact newContact = Contact(0, name, accountNumber);
-                    save(newContact)
-                        .then((id) => Navigator.pop(context));
+                    _dao.save(newContact).then((id) => Navigator.pop(context));
                   },
                   child: Text("CRIAR"),
                 ),

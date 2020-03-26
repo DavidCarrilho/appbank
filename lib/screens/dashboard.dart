@@ -2,6 +2,7 @@ import 'package:appbank/screens/contacts_list.dart';
 import 'package:flutter/material.dart';
 
 const _textHome = "Dashboard";
+const _imgHome = "images/home.jpg";
 
 class Dashboard extends StatelessWidget {
   @override
@@ -18,7 +19,7 @@ class Dashboard extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset("images/home.jpg"),
+            child: Image.asset(_imgHome),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
