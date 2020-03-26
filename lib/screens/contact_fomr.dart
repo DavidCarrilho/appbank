@@ -2,6 +2,10 @@ import 'package:appbank/database/dao/contact_dao.dart';
 import 'package:appbank/models/contact.dart';
 import 'package:flutter/material.dart';
 
+const String _textNewContact = "Novo Contato";
+const String _labelContact = "Nome Completo";
+const String _labelAccountNumber = "Número da Conta";
+
 class ContactForm extends StatefulWidget {
   @override
   _ContactFormState createState() => _ContactFormState();
@@ -18,7 +22,7 @@ class _ContactFormState extends State<ContactForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Novo Contato"),
+        title: Text(_textNewContact),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -29,7 +33,7 @@ class _ContactFormState extends State<ContactForm> {
               child: TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    labelText: "Nome Completo",
+                    labelText: _labelContact,
                   ),
                   style: TextStyle(fontSize: 18)),
             ),
@@ -39,7 +43,7 @@ class _ContactFormState extends State<ContactForm> {
                   controller: _accountNumberController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: "Número da Conta",
+                    labelText: _labelAccountNumber,
                   ),
                   style: TextStyle(fontSize: 18)),
             ),
