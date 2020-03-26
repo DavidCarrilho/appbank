@@ -4,7 +4,7 @@ import 'package:appbank/models/contact.dart';
 import 'package:appbank/screens/contact_fomr.dart';
 import 'package:flutter/material.dart';
 
-const String _textContact = "ContactsList";
+const String _textContact = "Lista de Transferência";
 const String _textErrorContact = "Erro ao Carregar";
 
 class ContactList extends StatelessWidget {
