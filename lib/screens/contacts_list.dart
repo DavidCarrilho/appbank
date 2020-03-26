@@ -4,19 +4,17 @@ import 'package:appbank/models/contact.dart';
 import 'package:appbank/screens/contact_fomr.dart';
 import 'package:flutter/material.dart';
 
-class ContactList extends StatefulWidget {
-  @override
-  _ContactListState createState() => _ContactListState();
-}
+const String _textContact = "ContactsList";
+const String _textErrorContact = "Erro ao Carregar";
 
-class _ContactListState extends State<ContactList> {
+class ContactList extends StatelessWidget {
   final ContactDAO _dao = ContactDAO();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contatos"),
+        title: Text(_textContact),
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: List(),
@@ -43,7 +41,7 @@ class _ContactListState extends State<ContactList> {
               );
               break;
           }
-          return Text("Erro ao Carregar");
+          return Text(_textErrorContact);
         },
       ),
       floatingActionButton: FloatingActionButton(
