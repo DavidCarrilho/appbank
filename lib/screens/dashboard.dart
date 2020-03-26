@@ -1,4 +1,5 @@
 import 'package:appbank/screens/contacts_list.dart';
+import 'package:appbank/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
 
 const _textHome = "Dashboard";
@@ -36,7 +37,9 @@ class Dashboard extends StatelessWidget {
                 _FeatureItem(
                   "Feed de Transações",
                   Icons.description,
-                  onClick: () {},
+                  onClick: () {
+                    _showTransactionList(context);
+                  },
                 ),
                 _FeatureItem(
                   "Feed de Transações",
@@ -51,6 +54,11 @@ class Dashboard extends StatelessWidget {
     );
   }
 
+  void _showTransactionList(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => TransactionsList()));
+  }
+
   void _showContactList(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => ContactList()));
@@ -62,12 +70,17 @@ class _FeatureItem extends StatelessWidget {
   final IconData icon;
   final Function onClick;
 
-  const _FeatureItem(this.name, this.icon, {@required this.onClick});
+  _FeatureItem(
+    this.name,
+    this.icon, {
+    @required this.onClick,
+  })  : assert(icon != null),
+        assert(onClick != null);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6),
       child: Material(
         color: Theme.of(context).primaryColor,
         child: InkWell(
