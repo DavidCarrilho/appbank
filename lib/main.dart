@@ -4,5 +4,5 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(AppBank());
-  finalAll();
+  finalAll().then((transactions) => print('new trasaction $transactions'));
 }
