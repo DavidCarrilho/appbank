@@ -14,13 +14,16 @@ class Dashboard extends StatelessWidget {
         title: Text(_textHome),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(_imgHome),
+            child: Container(
+              height: 300,
+              child: Image.asset(_imgHome),
+            ),
           ),
           Container(
             height: 125,
@@ -42,8 +45,8 @@ class Dashboard extends StatelessWidget {
                   },
                 ),
                 _FeatureItem(
-                  "Feed de Transações",
-                  Icons.description,
+                  "Exemplo",
+                  Icons.android,
                   onClick: () {},
                 ),
               ],

@@ -3,6 +3,8 @@ import 'package:appbank/models/contact.dart';
 import 'package:appbank/models/transaction.dart';
 import 'package:flutter/material.dart';
 
+const String _newTransaction = 'Nova Transação';
+
 class TransactionForm extends StatefulWidget {
   final Contact contact;
 
@@ -20,7 +22,7 @@ class _TransactionFormState extends State<TransactionForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nova Transação'),
+        title: Text(_newTransaction),
       ),
       body: SingleChildScrollView(
         child: Padding(
