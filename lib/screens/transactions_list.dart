@@ -1,12 +1,14 @@
 import 'package:appbank/components/centered_message.dart';
 import 'package:appbank/components/progress.dart';
-import 'package:appbank/http/webclient.dart';
+import 'package:appbank/http/webclients/transactions_webclient.dart';
 import 'package:appbank/models/transaction.dart';
 import 'package:flutter/material.dart';
 
 const String _textTransactionList = "Lista de Transações";
 
 class TransactionsList extends StatelessWidget {
+  final TransactionWebClient _webClient = TransactionWebClient();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +16,8 @@ class TransactionsList extends StatelessWidget {
         title: Text(_textTransactionList),
       ),
       body: FutureBuilder<List<Transaction>>(
-        future:
-            Future.delayed(Duration(seconds: 1)).then((value) => finalAll()),
+        future: Future.delayed(Duration(seconds: 1))
+            .then((value) => _webClient.finalAll()),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -34,7 +36,10 @@ class TransactionsList extends StatelessWidget {
                       final Transaction transaction = transactions[index];
                       return Card(
                         child: ListTile(
-                          leading: Icon(Icons.monetization_on, color: Colors.amber,),
+                          leading: Icon(
+                            Icons.monetization_on,
+                            color: Colors.amber,
+                          ),
                           title: Text(
                             transaction.value.toString(),
                             style: TextStyle(
