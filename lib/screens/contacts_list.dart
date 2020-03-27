@@ -1,4 +1,5 @@
 import 'package:appbank/components/contact_item.dart';
+import 'package:appbank/components/progress.dart';
 import 'package:appbank/database/dao/contact_dao.dart';
 import 'package:appbank/models/contact.dart';
 import 'package:appbank/screens/contact_fomr.dart';
@@ -18,15 +19,13 @@ class ContactList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: List(),
-        future: _dao.findAll(),
+        future: Future.delayed(Duration(seconds: 1)).then((value) => _dao.findAll()) ,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(child: Progress());
               break;
             case ConnectionState.active:
               break;
