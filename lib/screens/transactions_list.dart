@@ -34,7 +34,7 @@ class TransactionsList extends StatelessWidget {
                       final Transaction transaction = transactions[index];
                       return Card(
                         child: ListTile(
-                          leading: Icon(Icons.monetization_on),
+                          leading: Icon(Icons.monetization_on, color: Colors.amber,),
                           title: Text(
                             transaction.value.toString(),
                             style: TextStyle(

@@ -3,6 +3,7 @@ import 'package:appbank/components/progress.dart';
 import 'package:appbank/database/dao/contact_dao.dart';
 import 'package:appbank/models/contact.dart';
 import 'package:appbank/screens/contact_fomr.dart';
+import 'package:appbank/screens/transaction_form.dart';
 import 'package:flutter/material.dart';
 
 const String _textContact = "Lista de Transferência";
@@ -19,7 +20,8 @@ class ContactList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: List(),
-        future: Future.delayed(Duration(seconds: 1)).then((value) => _dao.findAll()) ,
+        future: Future.delayed(Duration(seconds: 1))
+            .then((value) => _dao.findAll()),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -34,7 +36,13 @@ class ContactList extends StatelessWidget {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Contact contact = contacts[index];
-                  return ContactItem(contact);
+                  return ContactItem(
+                    contact,
+                    onClick: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => TransactionForm(contact)));
+                    },
+                  );
                 },
                 itemCount: contacts.length,
               );

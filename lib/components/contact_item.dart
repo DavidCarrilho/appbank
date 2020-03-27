@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 
 class ContactItem extends StatelessWidget {
   final Contact contact;
+  final Function onClick;
 
-  const ContactItem(this.contact);
+  const ContactItem(
+    this.contact, {
+    @required this.onClick,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () => onClick(),
         title: Text(
           contact.name,
           style: TextStyle(fontSize: 24),
