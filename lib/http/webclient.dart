@@ -5,6 +5,8 @@ import 'package:appbank/models/transaction.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
+const String baseUrl = "http://192.168.0.116:8080/transactions";
+
 class LoggingInterceptor implements InterceptorContract {
   @override
   Future<RequestData> interceptRequest({RequestData data}) async {
@@ -25,12 +27,12 @@ class LoggingInterceptor implements InterceptorContract {
   }
 }
 
+final Client client =
+    HttpClientWithInterceptor.build(interceptors: [LoggingInterceptor()]);
+
 Future<List<Transaction>> finalAll() async {
-  final Client client =
-      HttpClientWithInterceptor.build(interceptors: [LoggingInterceptor()]);
   final Response response =
-      // await client.get("http://192.168.0.116:8080/transactions");
-      await client.get("http://192.168.0.116:8080/transactions").timeout(Duration(seconds: 10));
+      await client.get(baseUrl).timeout(Duration(seconds: 10));
   final List<dynamic> decodeJson = jsonDecode(response.body);
   final List<Transaction> transactions = List();
   for (Map<String, dynamic> transactionJson in decodeJson) {
@@ -46,4 +48,32 @@ Future<List<Transaction>> finalAll() async {
     transactions.add(transaction);
   }
   return transactions;
+}
+
+Future<Transaction> save(Transaction transaction) async {
+  final Map<String, dynamic> transactionMap = {
+    'value': transaction.value,
+    'contact': {
+      'name': transaction.contact.name,
+      'accountNumber': transaction.contact.accountNumber
+    }
+  };
+  final String transactionJson = jsonEncode(transactionMap);
+
+  final Response response = await client.post(baseUrl,
+      headers: {
+        'Content-type': 'application/json',
+        'password': '1000',
+      },
+      body: transactionJson);
+  Map<String, dynamic> json = jsonDecode(response.body);
+  final Map<String, dynamic> contactJson = json['contact'];
+  return Transaction(
+    json['value'],
+    Contact(
+      0,
+      contactJson['name'],
+      contactJson['accountNumber'],
+    ),
+  );
 }
