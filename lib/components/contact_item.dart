@@ -5,7 +5,7 @@ class ContactItem extends StatelessWidget {
   final Contact contact;
   final Function onClick;
 
-  const ContactItem(
+  ContactItem(
     this.contact, {
     @required this.onClick,
   });
@@ -17,11 +17,15 @@ class ContactItem extends StatelessWidget {
         onTap: () => onClick(),
         title: Text(
           contact.name,
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(
+            fontSize: 24.0,
+          ),
         ),
         subtitle: Text(
           contact.accountNumber.toString(),
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(
+            fontSize: 16.0,
+          ),
         ),
       ),
     );

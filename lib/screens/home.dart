@@ -6,6 +6,7 @@ class AppBank extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: "AppBank",
       theme: ThemeData(
           primaryColor: Colors.lightBlue[900],
           accentColor: Colors.cyan[700],

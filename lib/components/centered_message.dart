@@ -24,6 +24,7 @@ class CenteredMessage extends StatelessWidget {
             child: Icon(
               icon,
               size: iconSize,
+              color: Theme.of(context).accentColor,
             ),
             visible: icon != null,
           ),
@@ -31,7 +32,10 @@ class CenteredMessage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 24.0),
             child: Text(
               message,
-              style: TextStyle(fontSize: fontSize),
+              style: TextStyle(
+                fontSize: fontSize,
+                color: Theme.of(context).accentColor,
+              ),
             ),
           ),
         ],

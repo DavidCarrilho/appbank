@@ -1,3 +1,4 @@
+import 'package:appbank/components/feature_item.dart';
 import 'package:appbank/screens/contacts_list.dart';
 import 'package:appbank/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
@@ -30,21 +31,21 @@ class Dashboard extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                _FeatureItem(
-                  "Transferência",
-                  Icons.monetization_on,
+                FeatureItem(
+                  "Contatos",
+                  Icons.supervised_user_circle,
                   onClick: () {
-                    _showContactList(context);
+                    _showContactsList(context);
                   },
                 ),
-                _FeatureItem(
+                FeatureItem(
                   "Feed de Transações",
                   Icons.description,
                   onClick: () {
-                    _showTransactionList(context);
+                    _showTransactionsList(context);
                   },
                 ),
-                _FeatureItem(
+                FeatureItem(
                   "Exemplo",
                   Icons.android,
                   onClick: () {},
@@ -57,60 +58,18 @@ class Dashboard extends StatelessWidget {
     );
   }
 
-  void _showTransactionList(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => TransactionsList()));
+  _showContactsList(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ContactsList(),
+      ),
+    );
   }
 
-  void _showContactList(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => ContactList()));
-  }
-}
-
-class _FeatureItem extends StatelessWidget {
-  final String name;
-  final IconData icon;
-  final Function onClick;
-
-  _FeatureItem(
-    this.name,
-    this.icon, {
-    @required this.onClick,
-  })  : assert(icon != null),
-        assert(onClick != null);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(6),
-      child: Material(
-        color: Theme.of(context).primaryColor,
-        child: InkWell(
-          onTap: () {
-            onClick();
-          },
-          child: Container(
-            padding: EdgeInsets.all(8),
-            height: 125,
-            width: 150,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 32,
-                ),
-                Text(
-                  name,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ],
-            ),
-          ),
-        ),
+  _showTransactionsList(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TransactionsList(),
       ),
     );
   }

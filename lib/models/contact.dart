@@ -3,7 +3,11 @@ class Contact {
   final String name;
   final int accountNumber;
 
-  Contact(this.id, this.name, this.accountNumber);
+  Contact(
+    this.id,
+    this.name,
+    this.accountNumber,
+  );
 
   @override
   String toString() {
@@ -16,8 +20,8 @@ class Contact {
         accountNumber = json['accountNumber'];
 
   Map<String, dynamic> toJson() =>
-    {
-      'name': name,
-      'accountNumber': accountNumber,
-    };
+      {
+        'name': name,
+        'accountNumber': accountNumber,
+      };
 }

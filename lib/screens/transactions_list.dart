@@ -1,6 +1,6 @@
 import 'package:appbank/components/centered_message.dart';
 import 'package:appbank/components/progress.dart';
-import 'package:appbank/http/webclients/transactions_webclient.dart';
+import 'package:appbank/http/webclients/transaction_webclient.dart';
 import 'package:appbank/models/transaction.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class TransactionsList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Transaction>>(
         future: Future.delayed(Duration(seconds: 1))
-            .then((value) => _webClient.finalAll()),
+            .then((value) => _webClient.findAll()),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -34,27 +34,7 @@ class TransactionsList extends StatelessWidget {
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       final Transaction transaction = transactions[index];
-                      return Card(
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.monetization_on,
-                            color: Colors.amber,
-                          ),
-                          title: Text(
-                            transaction.value.toString(),
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Text(
-                            transaction.contact.accountNumber.toString(),
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ),
-                      );
+                      return _cardTransaction(transaction: transaction);
                     },
                     itemCount: transactions.length,
                   );
@@ -71,6 +51,40 @@ class TransactionsList extends StatelessWidget {
             icon: Icons.signal_wifi_off,
           );
         },
+      ),
+    );
+  }
+}
+
+class _cardTransaction extends StatelessWidget {
+  const _cardTransaction({
+    Key key,
+    @required this.transaction,
+  }) : super(key: key);
+
+  final Transaction transaction;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: Icon(
+          Icons.monetization_on,
+          color: Colors.amber,
+        ),
+        title: Text(
+          transaction.value.toString(),
+          style: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text(
+          transaction.contact.accountNumber.toString(),
+          style: TextStyle(
+            fontSize: 16.0,
+          ),
+        ),
       ),
     );
   }
