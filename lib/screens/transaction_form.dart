@@ -1,3 +1,5 @@
+import 'package:appbank/components/response_dialog.dart';
+import 'package:appbank/components/transaction_auth_dialog.dart';
 import 'package:appbank/http/webclients/transaction_webclient.dart';
 import 'package:appbank/models/contact.dart';
 import 'package:appbank/models/transaction.dart';
@@ -60,15 +62,23 @@ class _TransactionFormState extends State<TransactionForm> {
                 child: SizedBox(
                   width: double.maxFinite,
                   child: RaisedButton(
-                    child: Text('TRANSFERIR'), onPressed: () {
-                      final double value = double.tryParse(_valueController.text);
-                      final transactionCreated = Transaction(value, widget.contact);
-                      _webClient.save(transactionCreated).then((transaction) {
-                       if(transaction != null){
-                         Navigator.pop(context);
-                       }
-                      });
-                  },
+                    child: Text('TRANSFERIR'),
+                    onPressed: () {
+                      final double value =
+                          double.tryParse(_valueController.text);
+                      final transactionCreated =
+                          Transaction(value, widget.contact);
+                      showDialog(
+                        context: context,
+                        builder: (contextDialog) {
+                          return TransactionAuthDialog(
+                            onConfirm: (String password) {
+                              _save(transactionCreated, password, context);
+                            },
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               )
@@ -77,5 +87,28 @@ class _TransactionFormState extends State<TransactionForm> {
         ),
       ),
     );
+  }
+
+  void _save(
+    Transaction transactionCreated,
+    String password,
+    BuildContext context,
+  ) async {
+    // Future.delayed(Duration(seconds: 1));
+    await _webClient.save(transactionCreated, password).then((transaction) {
+      if (transaction != null) {
+        showDialog(
+            context: context,
+            builder: (contextDialog) {
+              return SuccessDialog("Transação conluída");
+            }).then((value) => Navigator.pop(context));
+      }
+    }).catchError((e) {
+      showDialog(
+          context: context,
+          builder: (contextDialog) {
+            return FailureDialog(e.message);
+          });
+    }, test: (e) => e is Exception);
   }
 }
