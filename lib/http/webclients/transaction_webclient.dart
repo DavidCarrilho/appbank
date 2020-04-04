@@ -22,13 +22,22 @@ class TransactionWebClient {
         },
         body: transactionJson);
 
-    if (response.statusCode == 400) {
-      throw Exception("Ocorreu um erro aqui submit trasanction");
-    } 
-    if (response.statusCode == 401) {
-      throw Exception("Falha na autenticação");
+    if (response.statusCode == 200) {
+      return Transaction.fromJson(jsonDecode(response.body));
     }
-
-    return Transaction.fromJson(jsonDecode(response.body));
+    throw HttpExcepiton(_statusCodeResponses[response.statusCode]);
   }
+
+  static final Map<int, String> _statusCodeResponses = {
+    400: "Informe um valor",
+    401: "Falha na autenticação",
+  };
+}
+
+class HttpExcepiton implements Exception {
+  final String message;
+
+  HttpExcepiton(this.message);
+
+  
 }

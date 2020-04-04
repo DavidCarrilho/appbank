@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:appbank/components/response_dialog.dart';
 import 'package:appbank/components/transaction_auth_dialog.dart';
 import 'package:appbank/http/webclients/transaction_webclient.dart';
@@ -95,20 +97,30 @@ class _TransactionFormState extends State<TransactionForm> {
     BuildContext context,
   ) async {
     // Future.delayed(Duration(seconds: 1));
-    await _webClient.save(transactionCreated, password).then((transaction) {
-      if (transaction != null) {
-        showDialog(
-            context: context,
-            builder: (contextDialog) {
-              return SuccessDialog("Transação conluída");
-            }).then((value) => Navigator.pop(context));
-      }
-    }).catchError((e) {
+    final Transaction transaction =
+        await _webClient.save(transactionCreated, password)
+      .catchError((e) {
       showDialog(
           context: context,
           builder: (contextDialog) {
             return FailureDialog(e.message);
           });
-    }, test: (e) => e is Exception);
+    }, test: (e) => e is HttpExcepiton)
+    .catchError((e) {
+      showDialog(
+          context: context,
+          builder: (contextDialog) {
+            return FailureDialog("Timeout !!!!!");
+          });
+    }, test: (e) => e is TimeoutException);
+
+    if (transaction != null) {
+      await showDialog(
+          context: context,
+          builder: (contextDialog) {
+            return SuccessDialog("Transação conluída");
+          });
+      Navigator.pop(context);
+    }
   }
 }
