@@ -3,7 +3,8 @@ import 'package:http_interceptor/http_interceptor.dart';
 
 import 'interceptors/logging_interceptor.dart';
 
-const String baseUrl = 'http://192.168.0.116:8081/transactions';
+// const String baseUrl = 'http://192.168.0.116:8081/transactions';
+const String baseUrl = 'http://192.168.1.103:8081/transactions';
 
 final Client client = HttpClientWithInterceptor.build(
   interceptors: [LoggingInterceptor()],
