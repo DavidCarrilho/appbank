@@ -24,6 +24,7 @@ class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
   final TransactionWebClient _webClient = TransactionWebClient();
   final String transactionId = Uuid().v4();
+  bool _sending = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _TransactionFormState extends State<TransactionForm> {
                   padding: const EdgeInsets.all(8),
                   child: Progress(message: 'Enviando...'),
                 ),
-                visible: false,
+                visible: _sending,
               ),
               Text(
                 widget.contact.name,
@@ -131,6 +132,9 @@ class _TransactionFormState extends State<TransactionForm> {
 
   Future<Transaction> _send(Transaction transactionCreated, String password,
       BuildContext context) async {
+    setState(() {
+      _sending = true;
+    });
     final Transaction transaction =
         await _webClient.save(transactionCreated, password).catchError((e) {
       _showFailureMessage(context, message: e.message);
@@ -138,6 +142,12 @@ class _TransactionFormState extends State<TransactionForm> {
       _showFailureMessage(context, message: "TimeOut!");
     }, test: (e) => e is TimeoutException).catchError((e) {
       _showFailureMessage(context);
+    }).whenComplete(() {
+      setState(() {
+        setState(() {
+          _sending = false;
+        });
+      });
     });
     return transaction;
   }
