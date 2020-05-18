@@ -15,45 +15,54 @@ class Dashboard extends StatelessWidget {
         title: Text(_textHome),
         centerTitle: true,
       ),
-      body: ListView(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 300,
-              child: Image.asset(_imgHome),
+      body: LayoutBuilder(
+        builder: (context, constraints)=> SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+            minHeight: constraints.maxHeight
             ),
-          ),
-          Container(
-            height: 125,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                FeatureItem(
-                  "Contatos",
-                  Icons.supervised_user_circle,
-                  onClick: () {
-                    _showContactsList(context);
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 300,
+                    child: Image.asset(_imgHome),
+                  ),
                 ),
-                FeatureItem(
-                  "Feed de Transações",
-                  Icons.description,
-                  onClick: () {
-                    _showTransactionsList(context);
-                  },
-                ),
-                FeatureItem(
-                  "Exemplo",
-                  Icons.android,
-                  onClick: () {},
+                Container(
+                  height: 125,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      FeatureItem(
+                        "Contatos",
+                        Icons.supervised_user_circle,
+                        onClick: () {
+                          _showContactsList(context);
+                        },
+                      ),
+                      FeatureItem(
+                        "Feed de Transações",
+                        Icons.description,
+                        onClick: () {
+                          _showTransactionsList(context);
+                        },
+                      ),
+                      FeatureItem(
+                        "Exemplo",
+                        Icons.android,
+                        onClick: () {},
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
