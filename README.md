@@ -1,8 +1,17 @@
 # appbank
 
-A new Flutter project.
+Um projeto de aplicativo de um banco online.
+
+<p float="left">
+  <img src="Screenshot_1635650564.png" width="200">
+  <img src="Screenshot_1635650564.png" width="200">
+  <img src="Screenshot_1635650564.png" width="200">
+</p>
+
 
 ## Getting Started
+
+Flutter na versão 1.22.6
 
 This project is a starting point for a Flutter application.
 
