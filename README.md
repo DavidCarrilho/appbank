@@ -4,8 +4,8 @@ Um projeto de aplicativo de um banco online.
 
 <p float="left">
   <img src="screenshot/Screenshot_1635650564.png" width="200">
-  <img src="screenshot/Screenshot_1635650564.png" width="200">
-  <img src="screenshot/Screenshot_1635650564.png" width="200">
+  <img src="screenshot/Screenshot_1635650599.png" width="200">
+  <img src="screenshot/Screenshot_1635650632.png.png" width="200">
 </p>
 
 
